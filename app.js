@@ -26,9 +26,7 @@
     <path d="M13 17c0-3.2-2.4-5.2-5.6-5.6.8 3.2 2.4 5.2 5.6 5.6z"/>
   </svg>`;
 
-  const HEART_SVG = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M12 20s-7-4.35-9.5-8.8C.7 7.9 2.4 4.5 5.8 4.5c2 0 3.4 1.1 4.2 2.4C10.8 5.6 12.2 4.5 14.2 4.5c3.4 0 5.1 3.4 3.3 6.7C19 15.65 12 20 12 20z"/>
-  </svg>`;
+  const ZHA_GLYPH = `<span class="ornament-zha">ழ</span>`;
 
   function escapeHtml(str) {
     return str.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -54,10 +52,10 @@
   /* ---------------- Portrait fallback ---------------- */
   portraitImg.addEventListener('error', () => {
     portraitImg.classList.add('broken');
-    portraitPlaceholder.style.display = 'flex';
+    portraitPlaceholder.classList.add('show');
   });
   portraitImg.addEventListener('load', () => {
-    portraitPlaceholder.style.display = 'none';
+    portraitPlaceholder.classList.remove('show');
   });
 
   /* ---------------- Search ---------------- */
@@ -150,7 +148,7 @@
       <div class="jc-meaning-tagwrap"><span class="jc-meaning-tag">Meaning:</span></div>
       <p class="jc-meaning">${escapeHtml(k.mn)}</p>
       <div class="ornament-bottom">
-        <span class="ornament-line"></span>${HEART_SVG}<span class="ornament-line"></span>
+        <span class="ornament-line"></span>${ZHA_GLYPH}<span class="ornament-line"></span>
       </div>
     `;
   }
@@ -179,14 +177,17 @@
     clone.style.width = rect.width + 'px';
     clone.style.height = rect.height + 'px';
     clone.style.margin = '0';
-    clone.style.transformOrigin = direction === 'next' ? 'left center' : 'right center';
     flipStage.appendChild(clone);
 
     cardIndex = newIndex;
     kuralCard.innerHTML = cardContentHtml(KURALS[cardIndex]);
+    kuralCard.style.transform = direction === 'next' ? 'translateX(100%)' : 'translateX(-100%)';
+    kuralCard.style.transition = 'none';
 
     requestAnimationFrame(() => requestAnimationFrame(() => {
       clone.classList.add(direction === 'next' ? 'flip-out-left' : 'flip-out-right');
+      kuralCard.style.transition = 'transform 0.4s cubic-bezier(.3,.1,.2,1)';
+      kuralCard.style.transform = 'translateX(0)';
     }));
 
     clone.addEventListener('transitionend', () => {
@@ -197,7 +198,7 @@
     setTimeout(() => {
       if (clone.parentNode) clone.remove();
       isFlipping = false;
-    }, 700);
+    }, 650);
   }
 
   cardBackBtn.addEventListener('click', () => returnToView());

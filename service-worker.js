@@ -1,4 +1,4 @@
-const CACHE_NAME = 'valluvam-cache-v2';
+const CACHE_NAME = 'valluvam-cache-v3';
 const ASSETS = [
   './',
   './index.html',
@@ -6,10 +6,10 @@ const ASSETS = [
   './app.js',
   './kural_data.json',
   './manifest.json',
-  './Icons/icon-192.png',
-  './Icons/icon-512.png',
-  './Icons/icon-512-maskable.png',
-  './Assets/portrait.jpg'
+  './icons/icon-192.png',
+  './icons/icon-512.png',
+  './icons/icon-512-maskable.png',
+  './assets/portrait.png'
 ];
 
 self.addEventListener('install', (event) => {

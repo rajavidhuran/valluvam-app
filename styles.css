@@ -243,7 +243,7 @@ main { padding: 0.75rem 1rem 2rem; max-width: 640px; margin: 0 auto; }
 .flip-stage {
   position: relative;
   flex: 1;
-  perspective: 1600px;
+  overflow: hidden;
   max-width: 560px;
   width: 100%;
   margin: 0 auto;
@@ -251,23 +251,18 @@ main { padding: 0.75rem 1rem 2rem; max-width: 640px; margin: 0 auto; }
 
 .kural-journal-card {
   position: relative;
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
-  border-radius: 0.75rem;
-  box-shadow: 0 6px 24px var(--shadow);
-  padding: 2rem 1.5rem 1.75rem;
-  backface-visibility: hidden;
-  min-height: 480px;
+  padding: 2rem 0.5rem 1.75rem;
+  min-height: 420px;
 }
 
 .flip-leaving {
   z-index: 5;
-  transition: transform 0.5s cubic-bezier(.45,.05,.35,1);
-  transform: rotateY(0deg);
-  background: var(--card-bg);
+  transition: transform 0.4s cubic-bezier(.3,.1,.2,1), opacity 0.4s ease;
+  transform: translateX(0);
+  background: var(--bg);
 }
-.flip-out-left { transform: rotateY(-165deg); }
-.flip-out-right { transform: rotateY(165deg); }
+.flip-out-left { transform: translateX(-100%); }
+.flip-out-right { transform: translateX(100%); }
 
 .ornament-top, .ornament-bottom {
   display: flex;
@@ -279,6 +274,11 @@ main { padding: 0.75rem 1rem 2rem; max-width: 640px; margin: 0 auto; }
 .ornament-top { margin-bottom: 1.4rem; }
 .ornament-bottom { margin-top: 1.6rem; }
 .ornament-line { width: 44px; height: 1px; background: var(--ornament); opacity: 0.6; }
+.ornament-zha {
+  font-family: 'Kavivanar', cursive;
+  font-size: 1.3rem;
+  line-height: 1;
+}
 
 .jc-couplet {
   font-family: 'Kavivanar', cursive;
@@ -312,7 +312,7 @@ main { padding: 0.75rem 1rem 2rem; max-width: 640px; margin: 0 auto; }
   margin: 0 auto;
 }
 
-.jc-meaning-tagwrap { margin: 1.6rem 0 0.6rem; }
+.jc-meaning-tagwrap { text-align: center; margin: 1.6rem 0 0.6rem; }
 .jc-meaning-tag {
   display: inline-block;
   font-family: 'Caveat', cursive;
@@ -362,14 +362,25 @@ main { padding: 0.75rem 1rem 2rem; max-width: 640px; margin: 0 auto; }
   color: var(--ornament);
   opacity: 0.85;
 }
-.ornament-corner.top-left { margin: -0.5rem 0 0.5rem -0.3rem; }
+.ornament-corner.top-left { margin: -0.3rem 0 0.6rem -0.3rem; }
 .ornament-corner.bottom-left { margin: 1rem 0 0.5rem -0.3rem; }
 
-.cover-title-block { margin-bottom: 1.25rem; }
+.cover-hero {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.cover-title-block {
+  flex: 1 1 54%;
+  min-width: 0;
+  padding-top: 1.6rem;
+}
 
 .cover-title {
   font-family: 'Kavivanar', cursive;
-  font-size: 3rem;
+  font-size: 2.6rem;
   line-height: 1;
   color: var(--accent);
   margin: 0;
@@ -378,50 +389,46 @@ main { padding: 0.75rem 1rem 2rem; max-width: 640px; margin: 0 auto; }
 .cover-subtitle {
   font-family: 'Catamaran', sans-serif;
   font-weight: 700;
-  letter-spacing: 0.28em;
-  font-size: 0.78rem;
+  letter-spacing: 0.24em;
+  font-size: 0.68rem;
   color: var(--text);
   margin: 0.6rem 0 0;
-  padding-bottom: 0.6rem;
+  padding-bottom: 0.55rem;
   border-bottom: 2px solid var(--ornament);
   display: inline-block;
 }
 
 .portrait-frame {
   position: relative;
-  max-width: 260px;
-  margin: 0 auto 1.75rem;
-  aspect-ratio: 3 / 4;
-  border-radius: 0.9rem;
-  overflow: hidden;
-  border: 1px solid var(--rule);
+  flex: 0 0 44%;
+  min-height: 140px;
 }
 
 .portrait-frame img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
   display: block;
 }
 
 .portrait-placeholder {
   position: absolute;
   inset: 0;
-  display: flex;
+  aspect-ratio: 3 / 4;
+  display: none;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
   color: var(--muted);
-  border-radius: 0.9rem;
-  border: 1px dashed var(--rule);
   font-family: 'Caveat', cursive;
   font-size: 1rem;
 }
 
-.portrait-frame img:not([src]),
 .portrait-frame img.broken {
   display: none;
+}
+.portrait-placeholder.show {
+  display: flex;
 }
 
 .section-list {
