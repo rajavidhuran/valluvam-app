@@ -1,0 +1,17 @@
+{
+  "name": "Valluvam — Thirukkural",
+  "short_name": "Valluvam",
+  "description": "All 1330 couplets of the Thirukkural with English translation and meaning.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#1F1B16",
+  "theme_color": "#1F1B16",
+  "lang": "en",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
