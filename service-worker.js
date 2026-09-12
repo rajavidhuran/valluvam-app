@@ -6,10 +6,10 @@ const ASSETS = [
   './app.js',
   './kural_data.json',
   './manifest.json',
-  './icons/icon-192.png',
-  './icons/icon-512.png',
-  './icons/icon-512-maskable.png',
-  './assets/portrait.jpg'
+  './Icons/icon-192.png',
+  './Icons/icon-512.png',
+  './Icons/icon-512-maskable.png',
+  './Assets/portrait.jpg'
 ];
 
 self.addEventListener('install', (event) => {
